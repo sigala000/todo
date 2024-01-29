@@ -1,0 +1,52 @@
+<div class="container">
+
+    <h1>Todos-angular</h1>
+
+    <hr>
+    <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+        <div class="form-group">
+            <label for="task">Title</label>
+            <input type="text" class="form-control" id="task" placeholder="Enter task" ngModel name="task" required>
+            <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Required
+                field</small>
+
+            <label for="task">Deadline</label>
+            <input type="text" class="form-control" id="deadline" placeholder="Enter deadline" ngModel name="deadline" required>
+            <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Required
+                field</small>
+
+            <label for="task">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter description" ngModel name="description" required>
+            <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Required
+                field</small>
+        </div>
+
+        <button [disabled]="taskForm.invalid" id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Description</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Delete</th>
+                <th scope="col">File</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of taskArray; index as i">
+                <td>{{t.taskName}}</td>
+                <td>{{t.taskDead}}</td>
+                <td>{{t.taskDescription}}</td>
+                <td><input (change)="onCheck(i)" id="myCheckbox" type="checkbox"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Delete</button></td>
+                <input type="file" class="form-control"  id="file"  ngModel name="file">
+            </tr>
+
+        </tbody>
+    </table>
+</div>
